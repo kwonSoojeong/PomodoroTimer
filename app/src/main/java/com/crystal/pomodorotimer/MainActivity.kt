@@ -45,19 +45,30 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                    //새로운 타이머를 셋업하고 싶어서 조작할 경우, 기존 카운트다운을 cancel
-                    currentCountDownTimer?.cancel()
-                    currentCountDownTimer = null
+                    //새로운 타이머를 셋업하고 싶어서 조작할 경우, 기존 카운트다운을 cancel, Stop!
+                    stopCountDown()
                 }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
                     seekBar ?: return //엘비스 오퍼레이터 null 일경우 오른쪽을 리턴한다,  , return 값이아니라 익스프레션 리턴
                     //트레킹 터치가 끝났을 때. 타이머를 시작한다
-                    startCountDown(seekBar)
+                    stopCountDown()
 
+                    if(seekBar.progress == 0){
+                        //지금 동작하고 있는 타이머 끝낸다.
+
+                    }else{
+                        startCountDown(seekBar)
+                    }
                 }
             }
         )
+    }
+
+    private fun stopCountDown() {
+        currentCountDownTimer?.cancel()
+        currentCountDownTimer = null
+        soundPool.autoPause()
     }
 
     private fun startCountDown(seekBar: SeekBar) {
