@@ -1,5 +1,6 @@
 package com.crystal.pomodorotimer
 
+import android.annotation.SuppressLint
 import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -98,10 +99,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateRemainTime(remainMillis: Long) {
         val remainSeconds = remainMillis / 1000
 
-        remainMinutesTextView.text = "%02d".format(remainSeconds / 60) //분
+        remainMinutesTextView.text = "%02d'".format(remainSeconds / 60) //분
         remainSecondsTextView.text = "%02d".format(remainSeconds % 60) //초
         Log.d(
             "MainActivity",
